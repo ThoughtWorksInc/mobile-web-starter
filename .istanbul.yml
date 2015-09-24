@@ -1,0 +1,7 @@
+verbose: false
+instrumentation:
+    extensions:
+        - .js
+        - .jsx
+    excludes:
+        - shared/helpers/jsdom.js

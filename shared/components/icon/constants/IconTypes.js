@@ -1,0 +1,1 @@
+export default require('./__generated/IconTypes')

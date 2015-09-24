@@ -8,6 +8,9 @@ export default {
   options: {
     notify: false,
     logSnippet: false,
+    snippetOptions: {
+      ignorePaths: 'index.html'
+    },
     server: {
       baseDir: `${gulp.config('root.dist')}`,
       middleware: [

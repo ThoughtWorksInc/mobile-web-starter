@@ -1,6 +1,15 @@
 {
   "browser": {
-    "react": "react"
+    "react": "react",
+    "react/lib/ReactTransitionGroup": "react/lib/ReactTransitionGroup",
+    "classnames": "classnames",
+    "es6-promise": "es6-promise",
+    "object-assign": "object-assign",
+    "react-redux": "react-redux",
+    "react-router": "react-router",
+    "redux": "redux",
+    "store2": "store2",
+    "whatwg-fetch": "whatwg-fetch"
   },
   "browserify": {
     "transform": [

@@ -13,17 +13,15 @@ import AppDrawerNav from '../components/AppDrawerNav'
 
 import UserAvatar from '../../account/containers/UserAvatar'
 
-
 @connect(state => {
-
   const routes = state.router.routes;
-
   return {
     currentRoute: routes[state.router.routes.length - 1],
     featureRoutes: routes[1].childRoutes
   }
-
-}) class App extends React.Component {
+})
+//
+class App extends React.Component {
 
   static propTypes = {
     currentRoute: React.PropTypes.object.isRequired,
@@ -52,12 +50,15 @@ import UserAvatar from '../../account/containers/UserAvatar'
 
   _getNavListFromRoutes(routes) {
     return _.map(routes, (routeItem)=> {
+
+      const component = routeItem.component.WrappedComponent || routeItem.component
+
       return (
         <Link to={`/${routeItem.path}`}
               activeClassName='active'
               onClick={e=>this._hideDrawer(e)}>
-          <Icon type={routeItem.component.icon}/>
-          {routeItem.component.title}
+          <Icon type={component.icon}/>
+          {component.title}
         </Link>
       )
     })

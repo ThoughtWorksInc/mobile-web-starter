@@ -10,7 +10,7 @@ function configureStore(modules = [], routes = {}, initialState = {}) {
 
   const reducers = _.reduce(modules, (reducers, module)=> {
     if (_.isFunction(module.reducers)) {
-      reducers [`${module.name || _.uniq()}`] = module.reducers
+      reducers [`${module.name}`] = module.reducers
     }
     return reducers
   }, {});

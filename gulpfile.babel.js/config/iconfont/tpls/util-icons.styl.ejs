@@ -1,10 +1,10 @@
 @font-face {
   font-family:"<%= fontConfig.fontName %>";
-  src:font-url("<%= fontConfig.fontName %>.eot?hash=<%= fontConfig.hash %>");
-  src:font-url("<%= fontConfig.fontName %>.eot?hash=<%= fontConfig.hash %>#iefix") format("embedded-opentype"),
-      font-url("<%= fontConfig.fontName %>.woff2?hash=<%= fontConfig.hash %>") format("woff2"),
-      font-url("<%= fontConfig.fontName %>.woff?hash=<%= fontConfig.hash %>") format("woff"),
-      font-url("<%= fontConfig.fontName %>.ttf?hash=<%= fontConfig.hash %>") format("truetype");
+  src:font-url("<%= fontConfig.fontName %>.eot");
+  src:font-url("<%= fontConfig.fontName %>.eot#iefix") format("embedded-opentype"),
+      font-url("<%= fontConfig.fontName %>.woff2") format("woff2"),
+      font-url("<%= fontConfig.fontName %>.woff") format("woff"),
+      font-url("<%= fontConfig.fontName %>.ttf") format("truetype");
 }
 
 .<%= fontConfig.fontShortName %>{

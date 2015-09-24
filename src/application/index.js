@@ -11,6 +11,7 @@ import App from './containers/App';
 import PageHome from './containers/PageHome';
 
 const modules = [
+  require('../account'),
   require('../schedule'),
   require('../swap-board')
 ];

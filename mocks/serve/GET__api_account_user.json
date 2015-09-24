@@ -1,0 +1,9 @@
+{
+  "requestUrl": "/api/account/user",
+  "contentType": "application/javascript",
+  "statusCode": 200,
+  "data": {
+    "PPR": "12345678",
+    "username": "test"
+  }
+}

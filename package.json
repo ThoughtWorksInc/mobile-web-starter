@@ -6,7 +6,7 @@
   "scripts": {
     "build": "NODE_ENV=production gulp build",
     "test": "gulp lint && gulp test --cover",
-    "start": "NODE_ENV=production gulp start"
+    "start": "NODE_ENV=production gulp server"
   },
   "engines": {
     "node": ">=4"
@@ -25,6 +25,7 @@
     "chai": "^3.3.0",
     "compression": "^1.5.2",
     "config": "^1.16.0",
+    "connect-prism": "^1.0.4",
     "del": "^2.0.2",
     "envify": "^3.4.0",
     "eslint-plugin-react": "^3.4.2",

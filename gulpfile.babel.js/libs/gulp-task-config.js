@@ -56,6 +56,10 @@ export function autoRegister(TASK_NAME, bundleFn, devModelFn) {
 
   conf = conf.index || conf;
 
+  if (_.isFunction(conf)) {
+    conf = conf();
+  }
+
   if (conf.files && _.isArray(conf.files)) {
     return mergeStream.apply(gulp, _.map(conf.files, register.bind(gulp, conf.options)))
   }

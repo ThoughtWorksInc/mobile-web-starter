@@ -22,6 +22,7 @@ export default ()=> {
       snippetOptions: {
         ignorePaths: 'index.html'
       },
+      port: process.env.PORT || 3000,
       server: {
         baseDir: `${gulp.config('root.dist')}`,
         middleware: middlewares

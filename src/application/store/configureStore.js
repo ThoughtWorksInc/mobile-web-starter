@@ -20,9 +20,12 @@ function configureStore(modules = [], routes = {}, initialState = {}) {
   const rootReducer = combineReducers(reducers);
 
   const middlewares = [
-    thunkMiddleware,
-    loggerMiddleware
+    thunkMiddleware
   ];
+
+  if (process.env.NODE_ENV !== 'production') {
+    middlewares.push(loggerMiddleware)
+  }
 
   return compose(
     reduxReactRouter({

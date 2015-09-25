@@ -27,7 +27,7 @@ export default ()=> {
         baseDir: `${gulp.config('root.dist')}`,
         middleware: middlewares
       },
-      ui: {
+      ui: process.env.NODE_ENV === 'production' ? false : {
         port: 9999
       }
     }

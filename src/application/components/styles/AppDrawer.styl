@@ -1,0 +1,89 @@
+$app-drawer-transition = .2s cubic-bezier(.4, 0, .2, 1);
+
+.AppDrawer {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 1000;
+}
+
+.AppDrawer__contents {
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 240px;
+
+  box-sizing: border-box;
+  background-color: $color-white;
+
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.15)
+
+}
+
+.AppDrawer__bg {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+}
+
+.AppDrawer-enter {
+
+  .AppDrawer__contents {
+    transform: translate3d(-100%, 0, 0);
+  }
+
+  .AppDrawer__bg {
+    opacity: 0.2;
+  }
+
+  &.AppDrawer-enter-active {
+
+    .AppDrawer__contents {
+      transform: translate3d(0, 0, 0);
+    }
+
+    .AppDrawer__bg {
+      opacity: 1;
+    }
+
+    .AppDrawer__contents,
+    .AppDrawer__bg {
+      transform-style: preserve-3d;
+      transition: $app-drawer-transition;
+    }
+  }
+}
+
+.AppDrawer-leave {
+
+  .AppDrawer__contents {
+    transform: translate3d(0, 0, 0);
+  }
+
+  .AppDrawer__bg {
+    opacity: 1;
+  }
+
+  &.AppDrawer-leave-active {
+
+    .AppDrawer__contents {
+      transform: translate3d(-100%, 0, 0);
+    }
+
+    .AppDrawer__bg {
+      opacity: 0.2;
+    }
+
+    .AppDrawer__contents,
+    .AppDrawer__bg {
+      transform-style: preserve-3d;
+      transition: $app-drawer-transition;
+    }
+  }
+}

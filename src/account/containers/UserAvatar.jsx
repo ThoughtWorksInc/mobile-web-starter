@@ -10,7 +10,9 @@ import { connect } from 'react-redux'
   }
 }, {
   fetchUser: accountActions.fetchUser
-}) class UserAvatar extends React.Component {
+})
+//
+class UserAvatar extends React.Component {
 
   static propTypes = {
     profile: React.PropTypes.object,

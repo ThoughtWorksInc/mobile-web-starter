@@ -69,10 +69,12 @@ class App extends React.Component {
     const currentRoute = this.props.currentRoute;
     const featureRoutes = this.props.featureRoutes;
 
+    const component = currentRoute.component.WrappedComponent || currentRoute.component
+
     return (
       <div className='App'>
         <AppHeader
-          title={currentRoute.component.title}
+          title={component.title}
           onMenuBtnClick={e => this._openDrawer(e)}/>
         <AppContainer>
           {this.props.children}

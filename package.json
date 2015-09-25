@@ -6,7 +6,8 @@
   "scripts": {
     "build": "NODE_ENV=production gulp build",
     "test": "gulp lint && gulp test --cover",
-    "start": "npm run build && NODE_ENV=production gulp server"
+    "server": "NODE_ENV=production gulp server",
+    "start": "npm run build && npm run server"
   },
   "engines": {
     "node": ">=4"

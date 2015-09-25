@@ -1,5 +1,5 @@
 if (!global.Promise) {
-  global.Promise = require('es6-Promise').Promise
+  global.Promise = require('es6-promise').Promise
 }
 
 if (!global.Object.assign) {

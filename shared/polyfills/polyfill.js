@@ -7,5 +7,5 @@ if (!global.Object.assign) {
 }
 
 if (!global.fetch) {
-  global.fetch = require('whatwg-fetch')
+  require('whatwg-fetch')
 }

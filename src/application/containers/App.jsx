@@ -37,12 +37,14 @@ class App extends React.Component {
   }
 
   _openDrawer() {
+    console.log('_openDrawer')
     this.setState({
       drawerOpened: true
     })
   }
 
   _hideDrawer() {
+    console.log('_hideDrawer')
     this.setState({
       drawerOpened: false
     })

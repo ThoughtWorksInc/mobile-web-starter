@@ -11,4 +11,21 @@ body {
   background-color: $color-black;
 }
 
+// special helper for different device
+// rule
+// .iphone-os.iphone-os--v4-2-1
+// .iphone-os.iphone-os--v4-8
+// .android.android--v4-2-1
+// .android.android--v4-3
+
+body.iphone-os {
+  // body should have cursor pointer to solve issue with ios not allowing onClick handlers to fire on non-A tags
+  * {
+    cursor: pointer;
+  }
+}
+
+body.android {
+
+}
 

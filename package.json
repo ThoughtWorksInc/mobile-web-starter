@@ -7,7 +7,7 @@
     "build": "NODE_ENV=production gulp build",
     "test": "gulp lint && gulp test --cover",
     "postinstall": "npm run build",
-    "start": "babel-node server"
+    "start": "nodemon server/index.js"
   },
   "engines": {
     "node": ">=4"
@@ -71,6 +71,7 @@
     "express": "^4.13.3",
     "history": "^1.10.1",
     "moment": "^2.10.6",
+    "nodemon": "^1.7.1",
     "normalize.css": "^3.0.3",
     "object-assign": "^4.0.1",
     "react": "^0.13.3",

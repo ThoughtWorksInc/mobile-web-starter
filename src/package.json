@@ -3,6 +3,7 @@
     "react": "react",
     "react/lib/ReactTransitionGroup": "react/lib/ReactTransitionGroup",
     "classnames": "classnames",
+    "socket.io-client": "socket.io-client",
     "es6-promise": "es6-promise",
     "object-assign": "object-assign",
     "react-redux": "react-redux",

@@ -6,6 +6,7 @@ import { Route, IndexRoute } from 'react-router';
 
 import configureStore from './store/configureStore';
 import combineRoutes from './helpers/combineRoutes'
+import socket from '../socket'
 
 import App from './containers/App';
 import PageHome from './containers/PageHome';
@@ -17,8 +18,11 @@ const modules = [
 ];
 
 function application(rootElm) {
+
+  const store = configureStore(modules)
+
   React.render(
-    <Provider store={configureStore(modules)}>
+    <Provider store={store}>
       {()=>(
         <ReduxRouter>
           <Route path='/'
@@ -29,8 +33,9 @@ function application(rootElm) {
         </ReduxRouter>
       )}
     </Provider>,
-    rootElm
-  );
+    rootElm, ()=> {
+      socket(store)
+    });
 }
 
 export default application

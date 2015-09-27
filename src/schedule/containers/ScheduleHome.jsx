@@ -1,10 +1,11 @@
 import React from 'react'
+import moment from 'moment'
 import { connect } from 'react-redux';
 
 @connect(state=> {
-  const profile = state.account.profile
+  const scheduleList = Object.values(state.schedule.schedule)
   return {
-    profile
+    scheduleList
   }
 })
 //
@@ -14,17 +15,29 @@ class ScheduleHome extends React.Component {
   static title = 'Schedule';
 
   static propTypes = {
-    profile: React.PropTypes.object
+    scheduleList: React.PropTypes.array
   }
 
   render() {
 
-    const profile = this.props.profile;
+    const scheduleList = this.props.scheduleList;
 
     return (
       <div>
-        # { profile.username }
         ScheduleHome
+        <ul>
+          {scheduleList.map((scheduleItem, idx)=> {
+            return (
+              <li key={idx}>
+                <span>
+                  {moment(parseInt(scheduleItem.time)).toISOString()}
+                </span>
+                :
+                <span>{scheduleItem.message}</span>
+              </li>
+            )
+          })}
+        </ul>
       </div>
     )
   }

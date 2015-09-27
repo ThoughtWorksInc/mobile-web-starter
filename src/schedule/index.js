@@ -4,7 +4,7 @@ import { combineReducers } from 'redux';
 
 import ScheduleHome from './containers/ScheduleHome'
 
-import scheduleReducer from './reducers/scheduleReducer'
+import schedule from './reducers/schedule'
 
 export const components = {
   ScheduleHome: ScheduleHome
@@ -18,5 +18,5 @@ export const routes = (
 );
 
 export const reducers = combineReducers({
-  scheduleReducer
+  schedule
 })

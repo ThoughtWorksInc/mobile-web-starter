@@ -1,3 +1,4 @@
 export default {
-  FETCH: 'FETCH'
+  FETCH: 'FETCH',
+  ADD_SCHEDULE: 'ADD_SCHEDULE'
 }

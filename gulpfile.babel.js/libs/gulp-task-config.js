@@ -50,14 +50,14 @@ export function autoRegister(TASK_NAME, bundleFn, devModelFn) {
 
   let conf = gulp.config(['tasks', TASK_NAME])
 
-  if (_.isEmpty(conf)) {
-    throw new gutil.PluginError(TASK_NAME, 'missing configure')
-  }
-
   conf = conf.index || conf;
 
   if (_.isFunction(conf)) {
     conf = conf();
+  }
+
+  if (_.isEmpty(conf)) {
+    throw new gutil.PluginError(TASK_NAME, 'missing configure')
   }
 
   if (conf.files && _.isArray(conf.files)) {

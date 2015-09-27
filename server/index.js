@@ -1,16 +1,17 @@
 const http = require('http')
 const express = require('express');
 
-const compress = require('compression')
+const compression = require('compression')
 const middlewareMockServer = require('./libs/middlewareMockServer')
 
 const app = express();
 const server = http.Server(app);
 const io = require('socket.io')(server);
 
-app.use(express.static(`${process.cwd()}/public`))
-app.use(compress())
+app.use(compression())
 app.use(middlewareMockServer())
+
+app.use(express.static(`${process.cwd()}/public`))
 
 io.on('connection', function (socket) {
 

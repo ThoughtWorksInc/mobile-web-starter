@@ -1,5 +1,5 @@
 import React from 'react'
-
+import ReactDOM from 'react-dom'
 
 const TICK = 17;
 
@@ -61,8 +61,20 @@ const endEvents = [];
 
 const TimeoutTransitionGroupChild = React.createClass({
 
+  propTypes: {
+    name: React.PropTypes.string,
+    enter: React.PropTypes.bool,
+    leave: React.PropTypes.bool,
+    children: React.PropTypes.node,
+    enterTimeout: React.PropTypes.number.isRequired,
+    leaveTimeout: React.PropTypes.number.isRequired,
+    transitionName: React.PropTypes.string.isRequired,
+    transitionEnter: React.PropTypes.bool,
+    transitionLeave: React.PropTypes.bool
+  },
+
   transition: function (animationType, finishCallback) {
-    const node = this.getDOMNode();
+    const node = ReactDOM.findDOMNode(this);
     const className = this.props.name + '-' + animationType;
     const activeClassName = className + '-active';
 
@@ -104,7 +116,7 @@ const TimeoutTransitionGroupChild = React.createClass({
   flushClassNameQueue: function () {
     if (this.isMounted()) {
       this.classNameQueue.forEach(function (name) {
-        addClass(this.getDOMNode(), name);
+        addClass(ReactDOM.findDOMNode(this), name);
       }.bind(this));
     }
     this.classNameQueue.length = 0;

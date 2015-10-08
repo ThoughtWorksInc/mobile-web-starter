@@ -13,11 +13,11 @@ import AppDrawerNav from '../components/AppDrawerNav'
 
 import UserAvatar from '../../account/containers/UserAvatar'
 
-@connect(state => {
-  const routes = state.router.routes;
+@connect(null, null, (stateProps, dispatchProps, ownProps)=> {
   return {
-    currentRoute: routes[state.router.routes.length - 1],
-    featureRoutes: routes[1].childRoutes
+    currentRoute: ownProps.routes[ownProps.routes.length - 1],
+    featureRoutes: ownProps.routes[0].childRoutes,
+    children: ownProps.children
   }
 })
 //
@@ -53,7 +53,7 @@ class App extends React.Component {
   _getNavListFromRoutes(routes) {
     return _.map(routes, (routeItem)=> {
 
-      const component = routeItem.component.WrappedComponent || routeItem.component
+      const component = routeItem.component
 
       return (
         <Link to={`/${routeItem.path}`}
@@ -71,7 +71,9 @@ class App extends React.Component {
     const currentRoute = this.props.currentRoute;
     const featureRoutes = this.props.featureRoutes;
 
-    const component = currentRoute.component.WrappedComponent || currentRoute.component
+    console.log(currentRoute, featureRoutes)
+
+    const component = currentRoute.component
 
     return (
       <div className='App'>

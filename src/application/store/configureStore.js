@@ -1,10 +1,7 @@
 import _ from 'lodash'
-import { createStore, applyMiddleware, combineReducers, compose } from 'redux';
+import { createStore, applyMiddleware, combineReducers } from 'redux';
 import thunkMiddleware from 'redux-thunk';
-import loggerMiddleware from 'redux-logger';
-import createHistory from 'history/lib/createHashHistory';
-
-import { reduxReactRouter, routerStateReducer } from 'redux-router';
+import createLogger from 'redux-logger';
 
 function configureStore(modules = [], routes = {}, initialState = {}) {
 
@@ -15,8 +12,6 @@ function configureStore(modules = [], routes = {}, initialState = {}) {
     return reducers
   }, {});
 
-  reducers.router = routerStateReducer;
-
   const rootReducer = combineReducers(reducers);
 
   const middlewares = [
@@ -24,15 +19,10 @@ function configureStore(modules = [], routes = {}, initialState = {}) {
   ];
 
   if (process.env.NODE_ENV !== 'production') {
-    middlewares.push(loggerMiddleware)
+    middlewares.push(createLogger())
   }
 
-  return compose(
-    reduxReactRouter({
-      createHistory
-    }),
-    applyMiddleware(...middlewares)
-  )(createStore)(rootReducer, initialState);
+  return applyMiddleware(...middlewares)(createStore)(rootReducer, initialState);
 
 }
 

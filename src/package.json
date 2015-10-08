@@ -1,7 +1,8 @@
 {
   "browser": {
     "react": "react",
-    "react/lib/ReactTransitionGroup": "react/lib/ReactTransitionGroup",
+    "react-dom": "react-dom",
+    "react-addons-transition-group": "react-addons-transition-group",
     "classnames": "classnames",
     "socket.io-client": "socket.io-client",
     "es6-promise": "es6-promise",

@@ -1,10 +1,11 @@
 import React from 'react';
+import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
-import { ReduxRouter } from 'redux-router';
-
-import { Route, IndexRoute } from 'react-router';
+import { Router, Route, IndexRoute } from 'react-router';
 
 import configureStore from './store/configureStore';
+import createHistory from 'history/lib/createHashHistory';
+
 import combineRoutes from './helpers/combineRoutes'
 import socket from '../socket'
 
@@ -21,17 +22,15 @@ function application(rootElm) {
 
   const store = configureStore(modules)
 
-  React.render(
+  ReactDOM.render(
     <Provider store={store}>
-      {()=>(
-        <ReduxRouter>
-          <Route path='/'
-                 component={App}>
-            <IndexRoute component={PageHome}/>
-            {combineRoutes(modules)}
-          </Route>
-        </ReduxRouter>
-      )}
+      <Router history={createHistory()}>
+        <Route path='/'
+               component={App}>
+          <IndexRoute component={PageHome}/>
+          {combineRoutes(modules)}
+        </Route>
+      </Router>
     </Provider>,
     rootElm, ()=> {
       socket(store)

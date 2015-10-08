@@ -1,9 +1,9 @@
 import { expect } from 'chai';
 
-import React from 'react/addons'
+import React from 'react'
+import ReactDOM from 'react-dom'
+import TestUtils from 'react/lib/ReactTestUtils'
 import Icon from '../Icon';
-
-const TestUtils = React.addons.TestUtils
 
 describe(__filename, ()=> {
 
@@ -11,7 +11,7 @@ describe(__filename, ()=> {
     it('should have className with "fa fa-<type>"', ()=> {
       const type = 'alt';
       const instance = TestUtils.renderIntoDocument(<Icon type={type}/>)
-      const instanceNodeClassName = React.findDOMNode(instance).className;
+      const instanceNodeClassName = ReactDOM.findDOMNode(instance).className;
 
       expect(instanceNodeClassName).to.contains('icon');
       expect(instanceNodeClassName).to.contains(`icon--${type}`);

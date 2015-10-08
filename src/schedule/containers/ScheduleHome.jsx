@@ -11,12 +11,12 @@ import { connect } from 'react-redux';
 //
 class ScheduleHome extends React.Component {
 
-  static icon = 'briefcase';
-  static title = 'Schedule';
-
   static propTypes = {
     scheduleList: React.PropTypes.array
   }
+
+  static icon = 'briefcase';
+  static title = 'Schedule';
 
   render() {
 

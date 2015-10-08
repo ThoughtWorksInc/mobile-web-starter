@@ -5,7 +5,7 @@ import ActionTypes from '../constants/ActionTypes'
 export function fetchUser() {
   return (dispatch, getState) => {
 
-    if (getState().account.profile.username) {
+    if (getState().getIn(['account', 'profile']).username) {
       return;
     }
 

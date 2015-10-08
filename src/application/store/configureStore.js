@@ -1,9 +1,11 @@
 import _ from 'lodash'
-import { createStore, applyMiddleware, combineReducers } from 'redux';
+import Immutable from 'immutable'
+import { createStore, applyMiddleware } from 'redux';
+import { combineReducers } from 'redux-immutablejs';
 import thunkMiddleware from 'redux-thunk';
 import createLogger from 'redux-logger';
 
-function configureStore(modules = [], routes = {}, initialState = {}) {
+function configureStore(modules = [], initialState = Immutable.fromJS({})) {
 
   const reducers = _.reduce(modules, (reducers, module)=> {
     if (_.isFunction(module.reducers)) {
@@ -19,7 +21,9 @@ function configureStore(modules = [], routes = {}, initialState = {}) {
   ];
 
   if (process.env.NODE_ENV !== 'production') {
-    middlewares.push(createLogger())
+    middlewares.push(createLogger({
+      transformer: state => state && Immutable.fromJS(state).toJS()
+    }))
   }
 
   return applyMiddleware(...middlewares)(createStore)(rootReducer, initialState);

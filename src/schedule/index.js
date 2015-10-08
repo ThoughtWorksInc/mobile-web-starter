@@ -1,6 +1,6 @@
 import React from 'react';
 import { Route } from 'react-router';
-import { combineReducers } from 'redux';
+import { combineReducers } from 'redux-immutablejs';
 
 import ScheduleHome from './containers/ScheduleHome'
 

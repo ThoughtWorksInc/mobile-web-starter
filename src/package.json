@@ -8,6 +8,8 @@
     "es6-promise": "es6-promise",
     "object-assign": "object-assign",
     "react-redux": "react-redux",
+    "immutable": "immutable",
+    "redux-immutablejs": "redux-immutablejs",
     "react-router": "react-router",
     "redux": "redux",
     "store2": "store2",

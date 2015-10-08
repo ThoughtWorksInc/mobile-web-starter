@@ -4,7 +4,7 @@ import * as accountActions from '../actions/account';
 import { connect } from 'react-redux'
 
 @connect(state=> {
-  const profile = state.account.profile
+  const profile = state.getIn(['account', 'profile']).toJS()
   return {
     profile
   }

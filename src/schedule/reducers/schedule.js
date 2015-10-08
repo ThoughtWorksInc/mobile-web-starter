@@ -1,25 +1,29 @@
 import store from 'store2'
+import Immutable from 'immutable'
 import ActionTypes from '../constants/ActionTypes'
 
-
 const STORAGE_KEY = 'schedule.schedule';
-const initialState = store.get(STORAGE_KEY, {})
+const initialState = Immutable.fromJS(store.get(STORAGE_KEY, {}))
 
 function schedule(state = initialState, action = {}) {
   switch (action.type) {
     case ActionTypes.FETCH:
-      return {};
+      return Immutable.fromJS({});
     case ActionTypes.ADD_SCHEDULE:
-      const scheduleState = Object.assign({}, state, {[action.schedule.time]: action.schedule});
 
-      const keys = Object.keys(scheduleState);
-      if (keys.length > 10) {
-        delete scheduleState[keys[0]];
+      let scheduleState = state.merge({
+        [action.schedule.time]: action.schedule
+      });
+
+
+      if (scheduleState.size > 10) {
+        scheduleState = scheduleState.delete(scheduleState.first().get('time'));
       }
 
-      store.set(STORAGE_KEY, scheduleState);
+      store.set(STORAGE_KEY, scheduleState.toJS());
 
       return scheduleState;
+
     default:
       return state;
   }

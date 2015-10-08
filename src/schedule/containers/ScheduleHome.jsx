@@ -3,9 +3,10 @@ import moment from 'moment'
 import { connect } from 'react-redux';
 
 @connect(state=> {
-  const scheduleList = Object.values(state.schedule.schedule)
+  console.log(state)
+  const scheduleList = state.getIn(['schedule', 'schedule']).toList().toJS()
   return {
-    scheduleList
+    scheduleList: scheduleList
   }
 })
 //
@@ -25,7 +26,7 @@ class ScheduleHome extends React.Component {
     return (
       <div>
         ScheduleHome
-        <ul>
+        <ol>
           {scheduleList.map((scheduleItem, idx)=> {
             return (
               <li key={idx}>
@@ -37,7 +38,7 @@ class ScheduleHome extends React.Component {
               </li>
             )
           })}
-        </ul>
+        </ol>
       </div>
     )
   }

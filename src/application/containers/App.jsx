@@ -13,14 +13,14 @@ import AppDrawerNav from '../components/AppDrawerNav'
 
 import UserAvatar from '../../account/containers/UserAvatar'
 
-@connect(null, null, (stateProps, dispatchProps, ownProps)=> {
+const Connect = connect(null, null, (stateProps, dispatchProps, ownProps)=> {
   return {
     currentRoute: ownProps.routes[ownProps.routes.length - 1],
     featureRoutes: ownProps.routes[0].childRoutes,
     children: ownProps.children
   }
 })
-//
+
 class App extends React.Component {
 
   static propTypes = {
@@ -97,4 +97,4 @@ class App extends React.Component {
   }
 }
 
-export default App
+export default Connect(App)

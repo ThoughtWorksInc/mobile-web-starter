@@ -2,14 +2,14 @@ import React from 'react'
 import moment from 'moment'
 import { connect } from 'react-redux';
 
-@connect(state=> {
+const Connect = connect(state=> {
   console.log(state)
   const scheduleList = state.getIn(['schedule', 'schedule']).toList().toJS()
   return {
     scheduleList: scheduleList
   }
 })
-//
+
 class ScheduleHome extends React.Component {
 
   static propTypes = {
@@ -44,4 +44,4 @@ class ScheduleHome extends React.Component {
   }
 }
 
-export default ScheduleHome
+export default Connect(ScheduleHome)

@@ -24,26 +24,9 @@ function whenInProductionDoUglify() {
   return gutil.noop()
 }
 
-function wrapWithPluginError(originalError) {
-  let message;
-
-  if (typeof originalError === 'string') {
-    message = originalError;
-  } else {
-    message = originalError.message.toString();
-  }
-  if (process.env.NODE_ENV === 'production') {
-    throw new Error(message);
-  }
-
-  gutil.log(new gutil.PluginError(TASK_NAME, message));
-}
-
 function bundle(config) {
   return config.bundler.bundle()
-    .on('error', (err)=> {
-      wrapWithPluginError(err)
-    })
+    .on('error', console.log.bind(this))
     .pipe(source(config.entry))
     .pipe(rename((obj)=> {
       obj.dirname = ''

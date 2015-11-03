@@ -14,11 +14,5 @@
     "redux": "redux",
     "store2": "store2",
     "whatwg-fetch": "whatwg-fetch"
-  },
-  "browserify": {
-    "transform": [
-      "babelify",
-      "envify"
-    ]
   }
 }

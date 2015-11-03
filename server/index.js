@@ -1,8 +1,8 @@
-const http = require('http')
-const express = require('express');
+import http from 'http'
+import express from 'express'
 
-const compression = require('compression')
-const middlewareMockServer = require('./libs/middlewareMockServer')
+import compression from 'compression'
+import middlewareMockServer from './libs/middlewareMockServer'
 
 const app = express();
 const server = http.Server(app);

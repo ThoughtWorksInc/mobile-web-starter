@@ -71,9 +71,7 @@ class App extends React.Component {
     const currentRoute = this.props.currentRoute;
     const featureRoutes = this.props.featureRoutes;
 
-    console.log(currentRoute, featureRoutes)
-
-    const component = currentRoute.component
+    const component = currentRoute.component;
 
     return (
       <div className='App'>
@@ -86,11 +84,8 @@ class App extends React.Component {
         <AppDrawer
           open={this.state.drawerOpened}
           onCloseClick={e => this._hideDrawer(e)}>
-
           <UserAvatar/>
-
           <AppDrawerNav list={this._getNavListFromRoutes(featureRoutes)}/>
-
         </AppDrawer>
       </div>
     )

@@ -1,3 +1,4 @@
+import { handleActions } from 'redux-actions'
 import store from 'store2'
 import Immutable from 'immutable'
 import ActionTypes from '../constants/ActionTypes'
@@ -5,29 +6,27 @@ import ActionTypes from '../constants/ActionTypes'
 const STORAGE_KEY = 'schedule.schedule';
 const initialState = Immutable.fromJS(store.get(STORAGE_KEY, {}))
 
-function schedule(state = initialState, action = {}) {
-  switch (action.type) {
-    case ActionTypes.FETCH:
-      return Immutable.fromJS({});
-    case ActionTypes.ADD_SCHEDULE:
+const schedule = handleActions({
 
-      let scheduleState = state.merge({
-        [action.schedule.time]: action.schedule
-      });
+  [ActionTypes.FETCH]: ()=> {
+    return Immutable.fromJS({});
+  },
 
+  [ActionTypes.ADD_SCHEDULE]: (state, action = {})=> {
 
-      if (scheduleState.size > 10) {
-        scheduleState = scheduleState.delete(scheduleState.first().get('time'));
-      }
+    let scheduleState = state.merge({
+      [action.payload.time]: action.payload
+    });
 
-      store.set(STORAGE_KEY, scheduleState.toJS());
+    if (scheduleState.size > 10) {
+      scheduleState = scheduleState.delete(scheduleState.first().get('time'));
+    }
 
-      return scheduleState;
+    store.set(STORAGE_KEY, scheduleState.toJS());
 
-    default:
-      return state;
+    return scheduleState;
   }
-}
 
+}, initialState);
 
 export default schedule

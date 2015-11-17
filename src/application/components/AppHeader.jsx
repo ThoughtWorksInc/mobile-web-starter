@@ -2,7 +2,6 @@ import React from 'react';
 
 import Icon from 'shared/components/icon/Icon';
 
-
 class AppHeader extends React.Component {
 
   static propTypes = {
@@ -16,9 +15,8 @@ class AppHeader extends React.Component {
         <h1 className='AppHeader__title'>
           {this.props.title}
         </h1>
-
         <div className='AppHeader__btn'
-             onClick={this.props.onMenuBtnClick}>
+             onClick={e => this.props.onMenuBtnClick(e)}>
           <Icon type='menu'/>
         </div>
       </div>

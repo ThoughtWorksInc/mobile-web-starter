@@ -1,6 +1,10 @@
+import { createAction } from 'redux-actions'
 import accountApi from 'shared/apis/account'
 
 import ActionTypes from '../constants/ActionTypes'
+
+const fetchUserCompletedAction = createAction(ActionTypes.ACCOUNT_FETCH_USER_COMPLETED)
+const fetchUserFailedAction = createAction(ActionTypes.ACCOUNT_FETCH_USER_FAILED)
 
 export function fetchUser() {
   return (dispatch, getState) => {
@@ -11,13 +15,7 @@ export function fetchUser() {
 
     return accountApi.fetchUser()
       .then(res => res.json())
-      .then(res => dispatch({
-        type: ActionTypes.ACCOUNT_FETCH_USER_COMPLETED,
-        profile: res
-      }))
-      .catch(err => dispatch({
-        type: ActionTypes.ACCOUNT_FETCH_USER_FAILED,
-        err: err
-      }))
+      .then(res => dispatch(fetchUserCompletedAction(res)))
+      .catch(err => dispatch(fetchUserFailedAction(new Error(err))))
   }
 }

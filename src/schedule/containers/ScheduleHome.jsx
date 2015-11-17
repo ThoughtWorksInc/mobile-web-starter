@@ -3,7 +3,6 @@ import moment from 'moment'
 import { connect } from 'react-redux';
 
 const Connect = connect(state=> {
-  console.log(state)
   const scheduleList = state.getIn(['schedule', 'schedule']).toList().toJS()
   return {
     scheduleList: scheduleList

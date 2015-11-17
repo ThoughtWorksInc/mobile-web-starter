@@ -1,4 +1,4 @@
 export default {
-  FETCH: 'FETCH',
-  ADD_SCHEDULE: 'ADD_SCHEDULE'
+  FETCH: '@@schedule/FETCH',
+  ADD_SCHEDULE: '@@schedule/ADD_SCHEDULE'
 }

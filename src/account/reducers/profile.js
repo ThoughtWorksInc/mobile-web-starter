@@ -1,18 +1,18 @@
-import ActionTypes from '../constants/ActionTypes'
 import store from 'store2';
 import Immutable from 'immutable';
+import { handleActions } from 'redux-actions'
+import ActionTypes from '../constants/ActionTypes'
 
 const STORAGE_KEY = 'account.profile';
 const initialState = Immutable.fromJS(store.get(STORAGE_KEY, {}))
 
-function profile(state = initialState, action = {}) {
-  switch (action.type) {
-    case ActionTypes.ACCOUNT_FETCH_USER_COMPLETED:
-      store.set(STORAGE_KEY, action.profile)
-      return Immutable.fromJS(action.profile);
-    default:
-      return state;
+const profile = handleActions({
+
+  [ActionTypes.ACCOUNT_FETCH_USER_COMPLETED]: (state, action) => {
+    store.set(STORAGE_KEY, action.payload)
+    return Immutable.fromJS(action.payload);
   }
-}
+
+}, initialState)
 
 export default profile;

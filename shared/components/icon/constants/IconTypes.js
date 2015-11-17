@@ -1,1 +1,2 @@
-export default require('./__generated/IconTypes')
+import IconTypes from './__generated/IconTypes'
+export default IconTypes

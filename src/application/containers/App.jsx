@@ -13,6 +13,8 @@ import AppDrawerNav from '../components/AppDrawerNav'
 
 import UserAvatar from '../../account/containers/UserAvatar'
 
+console.log(process.env.TEST)
+
 const Connect = connect(null, null, (stateProps, dispatchProps, ownProps)=> {
   return {
     currentRoute: ownProps.routes[ownProps.routes.length - 1],

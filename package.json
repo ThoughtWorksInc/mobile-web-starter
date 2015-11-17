@@ -74,7 +74,6 @@
   },
   "dependencies": {
     "classnames": "^2.2.0",
-    "envify-config": "0.0.1",
     "es6-promise": "^3.0.2",
     "express": "^4.13.3",
     "history": "^1.13.1",

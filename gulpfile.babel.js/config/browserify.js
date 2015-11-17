@@ -2,7 +2,8 @@ import gulp from 'gulp'
 import path from 'path'
 import _ from 'lodash'
 import babelify from 'babelify'
-import envify from 'envify'
+import envify from 'envify/custom'
+import config from 'config'
 
 const vendorBrowser = require(path.join(process.cwd(), gulp.config('root.src'), 'package.json')).browser
 const jsDestFolder = `${gulp.config('root.dist')}/assets/js`
@@ -39,7 +40,9 @@ export default {
     plugin: (process.env.NODE_ENV === 'production') ? require('bundle-collapser/plugin') : null,
     transform: [
       babelify,
-      envify
+      envify(Object.assign({}, config.default, {
+        NODE_ENV: process.env.NODE_ENV
+      }))
     ]
   }
 }

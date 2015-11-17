@@ -12,8 +12,7 @@ const schedule = handleActions({
     return Immutable.fromJS({});
   },
 
-  [ActionTypes.ADD_SCHEDULE]: (state, action = {})=> {
-
+  [ActionTypes.ADD_SCHEDULE]: (state, action = {}) => {
     let scheduleState = state.merge({
       [action.payload.time]: action.payload
     });

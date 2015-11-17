@@ -17,7 +17,7 @@ export default {
         'basename': 'vendor',
         'basedir': basedir,
         'debug': true,
-        'require': _.map(_.keys(vendorBrowser), function (key) {
+        'require': _.map(_.keys(vendorBrowser), (key) => {
           return [
             vendorBrowser[key], {
               expose: key

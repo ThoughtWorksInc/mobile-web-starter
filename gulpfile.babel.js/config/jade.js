@@ -1,6 +1,6 @@
 import gulp from 'gulp';
 
-export default  {
+export default {
   'entry': `${gulp.config('root.src')}/*.jade`,
   'src': [
     `${gulp.config('root.src')}/*.jade`

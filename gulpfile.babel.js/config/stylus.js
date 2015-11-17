@@ -2,6 +2,19 @@ import gulp from 'gulp'
 import path from 'path'
 import autoprefixer from 'autoprefixer-stylus'
 
+
+function includeCss() {
+  return (stylus) => {
+    stylus.set('include css', true)
+  }
+}
+
+function nodeModules() {
+  return (stylus) => {
+    stylus.include(path.join(process.cwd(), 'node_modules'))
+  }
+}
+
 export default {
   'entry': [
     `${gulp.config('root.src')}/index.styl`
@@ -30,18 +43,5 @@ export default {
     ],
     linenos: process.env.NODE_ENV !== 'production',
     compress: process.env.NODE_ENV === 'production'
-  }
-}
-
-
-function includeCss() {
-  return function (stylus) {
-    stylus.set('include css', true)
-  }
-}
-
-function nodeModules() {
-  return function (stylus) {
-    stylus.include(path.join(process.cwd(), 'node_modules'))
   }
 }

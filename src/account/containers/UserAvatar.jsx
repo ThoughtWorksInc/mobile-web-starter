@@ -3,7 +3,7 @@ import * as accountActions from '../actions/account';
 
 import { connect } from 'react-redux'
 
-const Connect = connect(state=> {
+const userAvatarConnect = connect(state=> {
   const profile = state.getIn(['account', 'profile']).toJS()
   return {
     profile
@@ -11,7 +11,7 @@ const Connect = connect(state=> {
 }, {
   fetchUser: accountActions.fetchUser
 })
-//
+
 class UserAvatar extends React.Component {
 
   static propTypes = {
@@ -24,7 +24,6 @@ class UserAvatar extends React.Component {
   }
 
   render() {
-
     const profile = this.props.profile;
 
     return (
@@ -35,4 +34,4 @@ class UserAvatar extends React.Component {
   }
 }
 
-export default Connect(UserAvatar);
+export default userAvatarConnect(UserAvatar);

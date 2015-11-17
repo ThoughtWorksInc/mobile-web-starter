@@ -2,6 +2,7 @@ import React from 'react'
 import ReactDOM from 'react-dom'
 
 const TICK = 17;
+const endEvents = [];
 
 const EVENT_NAME_MAP = {
 
@@ -22,7 +23,37 @@ const EVENT_NAME_MAP = {
   }
 };
 
-const endEvents = [];
+function animationSupported() {
+  return endEvents.length !== 0;
+}
+
+function hasClass(element, className) {
+  if (element.classList) {
+    return element.classList.contains(className);
+  }
+  return (' ' + element.className + ' ').indexOf(' ' + className + ' ') > -1;
+}
+
+function addClass(element, className) {
+  if (element.classList) {
+    element.classList.add(className);
+  } else if (!hasClass(element, className)) {
+    element.className = element.className + ' ' + className;
+  }
+  return element;
+}
+
+function removeClass(element, className) {
+  if (hasClass(className)) {
+    if (element.classList) {
+      element.classList.remove(className);
+    } else {
+      element.className = (' ' + element.className + ' ')
+        .replace(' ' + className + ' ', ' ').trim();
+    }
+  }
+  return element;
+}
 
 (function detectEvents() {
   if (typeof window === 'undefined') {
@@ -73,18 +104,49 @@ const TimeoutTransitionGroupChild = React.createClass({
     transitionLeave: React.PropTypes.bool
   },
 
-  transition: function (animationType, finishCallback) {
+  componentWillMount() {
+    this.classNameQueue = [];
+  },
+
+  componentWillUnmount() {
+    if (this.timeout) {
+      clearTimeout(this.timeout);
+    }
+    if (this.animationTimeout) {
+      clearTimeout(this.animationTimeout);
+    }
+  },
+
+  componentWillEnter(done) {
+    if (this.props.enter) {
+      this.transition('enter', done);
+    } else {
+      done();
+    }
+  },
+
+  componentWillLeave(done) {
+    if (this.props.leave) {
+      this.transition('leave', done);
+    } else {
+      done();
+    }
+  },
+
+  transition(animationType, finishCallback) {
     const node = ReactDOM.findDOMNode(this);
     const className = this.props.name + '-' + animationType;
     const activeClassName = className + '-active';
 
-    const endListener = function () {
+    const endListener = () => {
       removeClass(node, className);
       removeClass(node, activeClassName);
 
       // Usually this optional callback is used for informing an owner of
       // a leave animation and telling it to remove the child.
-      finishCallback && finishCallback();
+      if (finishCallback) {
+        finishCallback();
+      }
     };
 
     if (!animationSupported()) {
@@ -105,7 +167,7 @@ const TimeoutTransitionGroupChild = React.createClass({
     this.queueClass(activeClassName);
   },
 
-  queueClass: function (className) {
+  queueClass(className) {
     this.classNameQueue.push(className);
 
     if (!this.timeout) {
@@ -113,87 +175,20 @@ const TimeoutTransitionGroupChild = React.createClass({
     }
   },
 
-  flushClassNameQueue: function () {
+  flushClassNameQueue() {
     if (this.isMounted()) {
-      this.classNameQueue.forEach(function (name) {
+      this.classNameQueue.forEach((name) => {
         addClass(ReactDOM.findDOMNode(this), name);
-      }.bind(this));
+      });
     }
     this.classNameQueue.length = 0;
     this.timeout = null;
   },
 
-  componentWillMount: function () {
-    this.classNameQueue = [];
-  },
-
-  componentWillUnmount: function () {
-    if (this.timeout) {
-      clearTimeout(this.timeout);
-    }
-    if (this.animationTimeout) {
-      clearTimeout(this.animationTimeout);
-    }
-  },
-
-  componentWillEnter: function (done) {
-    if (this.props.enter) {
-      this.transition('enter', done);
-    } else {
-      done();
-    }
-  },
-
-  componentWillLeave: function (done) {
-    if (this.props.leave) {
-      this.transition('leave', done);
-    } else {
-      done();
-    }
-  },
-
-  render: function () {
+  render() {
     return React.Children.only(this.props.children);
   }
 });
-
-
-function animationSupported() {
-  return endEvents.length !== 0;
-}
-
-/**
- * Functions for element class management to replace dependency on jQuery
- * addClass, removeClass and hasClass
- */
-function addClass(element, className) {
-  if (element.classList) {
-    element.classList.add(className);
-  } else if (!hasClass(element, className)) {
-    element.className = element.className + ' ' + className;
-  }
-  return element;
-}
-
-function removeClass(element, className) {
-  if (hasClass(className)) {
-    if (element.classList) {
-      element.classList.remove(className);
-    } else {
-      element.className = (' ' + element.className + ' ')
-        .replace(' ' + className + ' ', ' ').trim();
-    }
-  }
-  return element;
-}
-
-function hasClass(element, className) {
-  if (element.classList) {
-    return element.classList.contains(className);
-  } else {
-    return (' ' + element.className + ' ').indexOf(' ' + className + ' ') > -1;
-  }
-}
 
 
 export default TimeoutTransitionGroupChild

@@ -15,7 +15,7 @@ import UserAvatar from '../../account/containers/UserAvatar'
 
 console.log(process.env.TEST)
 
-const Connect = connect(null, null, (stateProps, dispatchProps, ownProps)=> {
+const appConnect = connect(null, null, (stateProps, dispatchProps, ownProps)=> {
   return {
     currentRoute: ownProps.routes[ownProps.routes.length - 1],
     featureRoutes: ownProps.routes[0].childRoutes,
@@ -54,7 +54,6 @@ class App extends React.Component {
 
   _getNavListFromRoutes(routes) {
     return _.map(routes, (routeItem)=> {
-
       const component = routeItem.component
 
       return (
@@ -69,7 +68,6 @@ class App extends React.Component {
   }
 
   render() {
-
     const currentRoute = this.props.currentRoute;
     const featureRoutes = this.props.featureRoutes;
 
@@ -94,4 +92,4 @@ class App extends React.Component {
   }
 }
 
-export default Connect(App)
+export default appConnect(App)

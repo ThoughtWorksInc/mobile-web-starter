@@ -8,11 +8,9 @@ const fetchUserFailedAction = createAction(ActionTypes.ACCOUNT_FETCH_USER_FAILED
 
 export function fetchUser() {
   return (dispatch, getState) => {
-
     if (getState().getIn(['account', 'profile']).username) {
-      return;
+      return null;
     }
-
     return accountApi.fetchUser()
       .then(res => res.json())
       .then(res => dispatch(fetchUserCompletedAction(res)))

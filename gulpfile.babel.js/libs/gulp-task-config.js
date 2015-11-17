@@ -4,16 +4,7 @@ import _ from 'lodash'
 import through from 'through'
 import mergeStream from 'merge-stream'
 
-let options = {}
-
-export default function bindToGulp(gulp) {
-  gulp.DEV_MODE = DEV_MODE
-  gulp.config = config
-  gulp.pipeTimer = pipeTimer
-  gulp.autoRegister = autoRegister
-}
-
-export const DEV_MODE = 'devMode'
+const options = {}
 
 export function config(path, value) {
   if (value) {
@@ -22,11 +13,10 @@ export function config(path, value) {
   return _.get(options, path)
 }
 
+export const DEV_MODE = 'devMode'
+
 export function pipeTimer(taskname = 'some task') {
-
   const startTime = new Date()
-
-  return through(start, end)
 
   function start() {
   }
@@ -44,10 +34,10 @@ export function pipeTimer(taskname = 'some task') {
     this.queue(null)
   }
 
+  return through(start, end)
 }
 
 export function autoRegister(TASK_NAME, bundleFn, devModelFn) {
-
   let conf = gulp.config(['tasks', TASK_NAME])
 
   conf = conf.index || conf;
@@ -55,6 +45,22 @@ export function autoRegister(TASK_NAME, bundleFn, devModelFn) {
 
   if (_.isFunction(conf)) {
     conf = conf();
+  }
+
+  function register(commonOptions, combinedConfig) {
+    let combinedConf = combinedConfig;
+
+    if (_.isObject(combinedConf)) {
+      combinedConf.options = _.merge({}, commonOptions, combinedConf.options)
+    } else {
+      combinedConf = commonOptions
+    }
+
+    if (_.isFunction(devModelFn) && gulp.config(DEV_MODE)) {
+      devModelFn(combinedConf)
+    }
+
+    return bundleFn(combinedConf)
   }
 
   if (_.isEmpty(conf)) {
@@ -66,21 +72,13 @@ export function autoRegister(TASK_NAME, bundleFn, devModelFn) {
   }
 
   return register(conf)
-
-  function register(commonOptions, config) {
-
-    if (_.isObject(config)) {
-      config.options = _.merge({}, commonOptions, config.options)
-    } else {
-      config = commonOptions
-    }
-
-    if (_.isFunction(devModelFn) && gulp.config(DEV_MODE)) {
-      devModelFn(config)
-    }
-
-    return bundleFn(config)
-
-  }
-
 }
+
+
+export default function bindToGulp(targetGulp) {
+  targetGulp.DEV_MODE = DEV_MODE
+  targetGulp.config = config
+  targetGulp.pipeTimer = pipeTimer
+  targetGulp.autoRegister = autoRegister
+}
+

@@ -2,7 +2,7 @@ import React from 'react'
 import moment from 'moment'
 import { connect } from 'react-redux';
 
-const Connect = connect(state=> {
+const scheduleHomeConnect = connect(state=> {
   const scheduleList = state.getIn(['schedule', 'schedule']).toList().toJS()
   return {
     scheduleList: scheduleList
@@ -19,7 +19,6 @@ class ScheduleHome extends React.Component {
   static title = 'Schedule';
 
   render() {
-
     const scheduleList = this.props.scheduleList;
 
     return (
@@ -30,7 +29,7 @@ class ScheduleHome extends React.Component {
             return (
               <li key={idx}>
                 <span>
-                  {moment(parseInt(scheduleItem.time)).toISOString()}
+                  {moment(parseInt(scheduleItem.time, 10)).toISOString()}
                 </span>
                 :
                 <span>{scheduleItem.message}</span>
@@ -43,4 +42,4 @@ class ScheduleHome extends React.Component {
   }
 }
 
-export default Connect(ScheduleHome)
+export default scheduleHomeConnect(ScheduleHome)

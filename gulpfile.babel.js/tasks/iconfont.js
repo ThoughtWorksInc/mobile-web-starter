@@ -10,7 +10,6 @@ import mapStream from 'map-stream'
 const TASK_NAME = 'iconfont'
 
 function iconfontOnce(conf) {
-
   const tplData = {
     fontConfig: _.merge({}, conf.options)
   }
@@ -37,12 +36,12 @@ function iconfontOnce(conf) {
       }),
       options: {
         data: tplData,
-        isProcess: function (data) {
+        isProcess: (data) => {
           return data.glyphs.length > 0
         }
       }
     }))
-    .pipe(rename(function (pathObj) {
+    .pipe(rename((pathObj) => {
       if (_.indexOf(['.ttf', '.svg', '.eot', '.woff', '.woff2'], pathObj.extname) > -1) {
         pathObj.dirname = conf.dest
       }

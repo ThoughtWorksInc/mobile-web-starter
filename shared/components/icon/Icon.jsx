@@ -15,11 +15,10 @@ class Icon extends React.Component {
     const { type } = this.props;
     return (
       <i className={classNames('icon', {
-        [`icon--${type}`]:type
+        [`icon--${type}`]: type
       })}/>
     )
   }
 }
-
 
 export default Icon

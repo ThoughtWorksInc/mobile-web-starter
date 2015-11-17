@@ -6,12 +6,11 @@ import thunkMiddleware from 'redux-thunk';
 import createLogger from 'redux-logger';
 
 function configureStore(modules = [], initialState = Immutable.fromJS({})) {
-
-  const reducers = _.reduce(modules, (reducers, module)=> {
+  const reducers = _.reduce(modules, (newReducers, module)=> {
     if (_.isFunction(module.reducers)) {
-      reducers [`${module.name}`] = module.reducers
+      newReducers [`${module.name}`] = module.reducers
     }
-    return reducers
+    return newReducers
   }, {});
 
   const rootReducer = combineReducers(reducers);
@@ -27,8 +26,6 @@ function configureStore(modules = [], initialState = Immutable.fromJS({})) {
   }
 
   return applyMiddleware(...middlewares)(createStore)(rootReducer, initialState);
-
 }
-
 
 export default configureStore;

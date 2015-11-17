@@ -3,7 +3,7 @@
  */
 
 import React from 'react';
-import ReactTransitionGroup from  'react-addons-transition-group';
+import ReactTransitionGroup from 'react-addons-transition-group';
 import TimeoutTransitionGroupChild from './TimeoutTransitionGroupChild';
 
 const TimeoutTransitionGroup = React.createClass({
@@ -16,14 +16,14 @@ const TimeoutTransitionGroup = React.createClass({
     transitionLeave: React.PropTypes.bool
   },
 
-  getDefaultProps: function () {
+  getDefaultProps() {
     return {
       transitionEnter: true,
       transitionLeave: true
     };
   },
 
-  _wrapChild: function (child) {
+  _wrapChild(child) {
     return (
       <TimeoutTransitionGroupChild
         {...this.props}
@@ -37,7 +37,7 @@ const TimeoutTransitionGroup = React.createClass({
     );
   },
 
-  render: function () {
+  render() {
     return (
       <ReactTransitionGroup
         {...this.props}

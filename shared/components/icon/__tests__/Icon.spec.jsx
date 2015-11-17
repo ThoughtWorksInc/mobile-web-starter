@@ -5,8 +5,7 @@ import ReactDOM from 'react-dom'
 import TestUtils from 'react/lib/ReactTestUtils'
 import Icon from '../Icon';
 
-describe(__filename, ()=> {
-
+describe(__filename, () => {
   context('when render with prop type', ()=> {
     it('should have className with "fa fa-<type>"', ()=> {
       const type = 'alt';
@@ -17,5 +16,5 @@ describe(__filename, ()=> {
       expect(instanceNodeClassName).to.contains(`icon--${type}`);
     })
   })
-
 })
+

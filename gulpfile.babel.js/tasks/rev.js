@@ -19,7 +19,6 @@ function revCleaner() {
     });
 
     callback(null, file)
-
   })
 }
 
@@ -43,12 +42,10 @@ function generateCacheManifest() {
       ).join('\n'));
 
     callback(null, file)
-
   })
 }
 
 function revOnce(conf) {
-
   const revAll = new RevAll(conf.options);
 
   return gulp.src(conf.src)

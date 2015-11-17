@@ -1,6 +1,6 @@
-import gulp from 'gulp'
-import requireDir from 'require-dir'
-import gulpTaskConfig from './libs/gulp-task-config'
+import gulp from 'gulp';
+import requireDir from 'require-dir';
+import gulpTaskConfig from './libs/gulp-task-config';
 
 gulpTaskConfig(gulp);
 
@@ -29,7 +29,7 @@ gulp.config('tasks.build', {
 
 gulp.task('dev', () => {
   gulp.config(gulp.DEV_MODE, true);
-  gulp.start(['build', 'server'])
+  gulp.start(['build', 'server']);
 });
 
 gulp.task('default', ['build']);

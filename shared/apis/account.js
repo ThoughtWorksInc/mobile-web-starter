@@ -1,6 +1,6 @@
 export default {
 
-  fetchUser(){
+  fetchUser() {
     return fetch(`/api/account/user`, {
       method: 'GET'
     })

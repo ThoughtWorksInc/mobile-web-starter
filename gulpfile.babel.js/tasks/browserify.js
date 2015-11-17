@@ -38,7 +38,6 @@ function bundle(config) {
 }
 
 function browserifyOnce(config = {}) {
-
   if (!config.bundler) {
     config.bundler = browserify(config.options)
   }
@@ -53,7 +52,8 @@ function browserifyOnce(config = {}) {
     'plugin',
     'require',
     'external'
-  ].forEach((method)=> {
+  ]
+    .forEach((method) => {
       [].concat(config.options[method])
         .forEach((args)=> {
           if (args) {
@@ -63,13 +63,10 @@ function browserifyOnce(config = {}) {
     })
 
   return bundle(config)
-
 }
 
 function browserifyTask() {
-
-  return gulp.autoRegister(TASK_NAME, browserifyOnce, (config)=> {
-
+  return gulp.autoRegister(TASK_NAME, browserifyOnce, (config) => {
     config.bundler = browserify(_.merge({}, config.options, watchify.args))
     config.bundler = watchify(config.bundler)
 
@@ -78,7 +75,6 @@ function browserifyTask() {
       gutil.log(gutil.colors.cyan('watchify'),
         're-bundled', 'after', gutil.colors.magenta(time > 1000 ? time / 1000 + ' s' : time + ' ms'))
     })
-
   })
 }
 

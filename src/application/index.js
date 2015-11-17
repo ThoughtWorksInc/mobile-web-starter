@@ -19,7 +19,6 @@ const modules = [
 ];
 
 function application(rootElm) {
-
   const store = configureStore(modules)
 
   ReactDOM.render(
